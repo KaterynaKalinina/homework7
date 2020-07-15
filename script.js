@@ -13,10 +13,8 @@ function nestingDepth(obj) {
             nestingDepth(element);
             counter++;
         };
-
     };
     return counter;
-
 }
 
 
@@ -31,7 +29,6 @@ const languages = {
             },
         },
     },
-
 }
 
 console.log(nestingDepth(languages));
