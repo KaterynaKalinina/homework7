@@ -5,13 +5,13 @@
 как в функции ниже, то все работает и проходят тесты. Так в чем же разница между этими глобальными переменными?
 */
 
-function nestingDepth(obj) {
-    counter = 0;
+function nestingDepth(obj, counter = 0) {
+   // counter = 0;
     for (const key in obj) {
         let element = obj[key];
         if (obj.hasOwnProperty(key) && element !== null && typeof element === 'object') {
-            nestingDepth(element);
-            counter++;
+            nestingDepth(element, ++counter);
+            //counter++;
         };
     };
     return counter;
