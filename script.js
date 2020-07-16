@@ -4,14 +4,14 @@
 функция работает, но падают тесты; если я делаю тоже глобальную переменную, когда не указываю let,
 как в функции ниже, то все работает и проходят тесты. Так в чем же разница между этими глобальными переменными?
 */
+// Такое решение работает даже при нескольких вызовах
 
-function nestingDepth(obj, counter = 0) {
-   // counter = 0;
+function nestingDepth(obj) {
+    counter = 0;
     for (const key in obj) {
-        let element = obj[key];
-        if (obj.hasOwnProperty(key) && element !== null && typeof element === 'object') {
-            nestingDepth(element, ++counter);
-            //counter++;
+        if (obj.hasOwnProperty(key) && obj[key] !== null && typeof obj[key] === 'object') {
+            nestingDepth(obj[key]);
+            counter++;
         };
     };
     return counter;
@@ -30,8 +30,10 @@ const languages = {
         },
     },
 }
-
 console.log(nestingDepth(languages));
+console.log(nestingDepth(languages));
+console.log(nestingDepth(languages));
+
 
 
 // Task 2
