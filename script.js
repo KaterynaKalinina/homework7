@@ -1,17 +1,9 @@
 // Task 1
 
-/* У меня вопрос: если я создаю глобальную переменную (let counter = 0;) перед функцией, то
-функция работает, но падают тесты; если я делаю тоже глобальную переменную, когда не указываю let,
-как в функции ниже, то все работает и проходят тесты. Так в чем же разница между этими глобальными переменными?
-*/
-// Такое решение работает даже при нескольких вызовах
-
-function nestingDepth(obj) {
-    counter = 0;
+function nestingDepth(obj, counter = 0) {
     for (const key in obj) {
         if (obj.hasOwnProperty(key) && obj[key] !== null && typeof obj[key] === 'object') {
-            nestingDepth(obj[key]);
-            counter++;
+            return nestingDepth(obj[key], ++counter);
         };
     };
     return counter;
@@ -31,15 +23,12 @@ const languages = {
     },
 }
 console.log(nestingDepth(languages));
-console.log(nestingDepth(languages));
-console.log(nestingDepth(languages));
-
 
 
 // Task 2
 
 function numberOfDiscrepancies(obj1, obj2) {
-    counter = 0;
+    let counter = 0;
     for (const key in obj1) {
         if (obj1.hasOwnProperty(key) && obj1[key] !== obj2[key]) {
             counter++;
@@ -47,7 +36,7 @@ function numberOfDiscrepancies(obj1, obj2) {
                 numberOfDiscrepancies(obj1[key], obj2[key]);
                 counter++;
             };
-        }; 
+        };
 
     };
     return counter;
